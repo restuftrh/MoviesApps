@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="@style/ToolbarTheme"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:titleTextAppearance="@style/Toolbar.TitleText">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            fontPath="fonts/robotoreguler.ttf"
+            tools:ignore="MissingPrefix"
+            android:id="@+id/toolbar_header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Header"
+            android:textSize="@dimen/text_headline"
+            android:textColor="@color/white"/>
+
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/spacing_huge"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:layout_marginBottom="@dimen/spacing_normal"-->
+            <!--android:layout_marginRight="@dimen/spacing_double"-->
+            <!--android:layout_marginTop="@dimen/spacing_normal"-->
+            <!--android:src="@drawable/logo_aasi"/>-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/spacing_huge"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginBottom="@dimen/spacing_normal"-->
+            <!--android:layout_marginRight="@dimen/spacing_double"-->
+            <!--android:layout_marginTop="@dimen/spacing_normal"-->
+            <!--android:src="@drawable/logo_lsp_panjang"/>-->
+    </FrameLayout>
+
+</androidx.appcompat.widget.Toolbar>

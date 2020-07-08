@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ss.bannerslider:bannerslider:1.6.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/45fe5bcba9ca2be69ded88ec50405594/jetified-bannerslider-1.6.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/45fe5bcba9ca2be69ded88ec50405594/jetified-bannerslider-1.6.1/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ss.bannerslider/bannerslider/1.6.1/3e945c01adc104a0979db7036988c75c07916ca5/bannerslider-1.6.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ss.bannerslider/bannerslider/1.6.1/9d5a74bbaee0ebd534c455f8ba3f355502b150f7/bannerslider-1.6.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoviesApps.com</string>
+    <string name="TOKEN_MAPS_API_KEY">AIzaSyCQLuiugg1fl_VhZMh_gfsmbVnE3JvlY78</string>
+
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_delete">Delete</string>
+    <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_loan_title_error">Error</string>
+    <string name="dialog_error_title">Oops</string>
+    <string name="dialog_general_error_Message">There was an error making the request</string>
+    <string name="dialog_error_no_connection">Sorry, you need a connection to do that!</string>
+    <string name="dialog_general_error_message">General Error</string>
+    <string name="generic_error_title">Ops! An error occurred.</string>
+
+    <!--Error Messages-->
+    <string name="error_not_found">Not found</string>
+    <string name="error_user_already_exist">User already exist</string>
+    <string name="error_login_failed">User not found</string>
+    <string name="error_field_empty">Tidak boleh kosong!</string>
+    <string name="error_field_empty2"></string>
+    <string name="error_permission">You must allow the permission to use this feature</string>
+
+
+
+    <!--BottomNav-->
+    <string name="movie">Movies</string>
+    <string name="series">Series</string>
+
+
+
+</resources>

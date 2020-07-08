@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/spacing_34"
+    android:background="@color/white"
+    tools:parentTag="RelativeLayout">
+
+    <View
+        android:id="@+id/history_tab_indicator_line"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"/>
+
+    <LinearLayout
+        android:id="@+id/history_tab_indicator_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal">
+
+        <TextView
+            fontPath="fonts/robotoreguler.ttf"
+            tools:ignore="MissingPrefix"
+            style="@style/HistoryTabIndicatorItem"
+            android:id="@+id/tab_indicator_txt_product"
+            android:text="Produk"
+            android:textColor="@color/black"/>
+
+        <TextView
+            fontPath="fonts/robotoreguler.ttf"
+            tools:ignore="MissingPrefix"
+            style="@style/HistoryTabIndicatorItem"
+            android:id="@+id/tab_indicator_txt_additional"
+            android:text="Tambahan"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/history_tab_indicator_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:paddingLeft="@dimen/spacing_normal"-->
+    <!--android:paddingRight="@dimen/spacing_normal"-->
+    <!--android:weightSum="2">-->
+
+    <!--&lt;!&ndash;Keahlian&ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/linear_order"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:text="Kehalian"/>-->
+    <!--</LinearLayout>-->
+    <!--&lt;!&ndash;Keagenan&ndash;&gt;-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/linear_reqorder"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:text="Keagenan"/>-->
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+</merge>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MovieApps.iml" filepath="$PROJECT_DIR$/.idea/modules/MovieApps.iml" group="MovieApps" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MovieApps-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MovieApps-app.iml" group="MovieApps/app" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>

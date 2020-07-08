@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.midtrans:corekit:1.21.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7965a1f353be2df1ce5b9df70705d08/jetified-corekit-1.21.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7965a1f353be2df1ce5b9df70705d08/jetified-corekit-1.21.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

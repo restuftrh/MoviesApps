@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.bluelinelabs:conductor:2.1.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5d391d870f6d063a26663770ab57daf8/jetified-conductor-2.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5d391d870f6d063a26663770ab57daf8/jetified-conductor-2.1.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bluelinelabs/conductor/2.1.0/a998b6f95f49a1b9e71bd89f6d44eefd9bab13c4/conductor-2.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bluelinelabs/conductor/2.1.0/5db7780793fd8104f0db9ce865161d65c444981a/conductor-2.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

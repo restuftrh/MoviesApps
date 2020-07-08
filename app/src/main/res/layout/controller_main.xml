@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.main.MainActivity">
+
+    <!--Content Main-->
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bn_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:menu="@menu/bottomnavigation_menu" />
+
+    <com.bluelinelabs.conductor.ChangeHandlerFrameLayout
+        android:id="@+id/main_child_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<!--<android.support.v4.widget.DrawerLayout-->
+<!--    android:visibility="gone"-->
+<!--    android:id="@+id/drawer_layout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fitsSystemWindows="true"-->
+<!--    tools:openDrawer="start">-->
+
+<!--    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        android:background="#F5F5F5"-->
+<!--        android:orientation="vertical"-->
+<!--        tools:openDrawer="start">-->
+
+
+
+<!--            <ImageView-->
+<!--                android:id="@+id/main_menu_cart"-->
+<!--                android:layout_width="@dimen/spacing_big"-->
+<!--                android:layout_height="@dimen/spacing_big"-->
+<!--                android:visibility="gone"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:background="?selectableItemBackground"-->
+<!--                android:padding="@dimen/spacing_normal"/>-->
+
+
+
+<!--        <com.aurelhubert.ahbottomnavigation.AHBottomNavigation-->
+<!--            android:id="@+id/main_bottom_navigation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+
+
+<!--    </LinearLayout>-->
+
+
+<!--    <android.support.design.widget.NavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:fitsSystemWindows="true">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <include layout="@layout/nav_header_sidenav" />-->
+
+<!--            <include layout="@layout/nav_menu_sidenav" />-->
+<!--        </LinearLayout>-->
+<!--    </android.support.design.widget.NavigationView>-->
+
+<!--</android.support.v4.widget.DrawerLayout>-->
+</RelativeLayout>

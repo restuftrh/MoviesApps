@@ -1,0 +1,6 @@
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        outputFileName = "${variant.name}-${variant.versionName}.apk"
+//        output.outputFileName = new File(rootProject.projectDir, apkPath + output.outputFile.name)
+    }
+}
