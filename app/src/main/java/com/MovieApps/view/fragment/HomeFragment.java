@@ -1,5 +1,6 @@
 package com.MovieApps.view.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.MovieApps.model.movies.ListMoviesResponse;
+import com.MovieApps.model.movies.MoviesResponse;
+import com.MovieApps.view.fragment.Adapter.MoviesGridAdapter;
 import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
+import com.MovieApps.widget.GridHeaderSpacingItemDecoration;
 import com.bluelinelabs.conductor.ChangeHandlerFrameLayout;
 import com.bluelinelabs.conductor.Controller;
 import com.github.mikephil.charting.charts.BarChart;
@@ -22,6 +27,9 @@ import com.MovieApps.di.component.ActivityComponent;
 import com.MovieApps.model.common.ApiResponse;
 import com.MovieApps.view.AppBaseActivity;
 import com.MovieApps.view.fragment.views.DashboardView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import net.derohimat.baseapp.ui.view.BaseRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +45,15 @@ public class HomeFragment extends Fragment implements DashboardView {
 
     @Inject PreferencesHelper preferencesHelper;
     @Inject FragmentDashboardPresenter presenter;
+    @Inject MoviesGridAdapter adapter;
+
+    BaseRecyclerView recyclerViewGrid;
 
     @Bind(com.MovieApps.R.id.main_child_container) ChangeHandlerFrameLayout childContainer;
+
+    ProgressDialog mdialog;
+
+    private List<ListMoviesResponse> response;
 
     public static void start(Context context) {
         context.startActivity(new Intent(
@@ -49,20 +64,22 @@ public class HomeFragment extends Fragment implements DashboardView {
 
     private final List<Controller.LifecycleListener> lifecycleListeners = new ArrayList<>();
 
-    SharedPreferences sharedpreferences;
-    public static final String MY_PREF = "DataSaver";
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        presenter = new FragmentDashboardPresenter(this, this, getContext());
         getActivityComponent().inject(this);
         bindPresenter(this, presenter);
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerViewGrid = view.findViewById(R.id.recyle_row);
 
+        presenter.getMovies();
+
+        mdialog = new ProgressDialog(getContext());
+        mdialog.setMessage("Please Wait");
+        mdialog.show();
 
         return view;
     }
@@ -121,16 +138,38 @@ public class HomeFragment extends Fragment implements DashboardView {
 
     }
 
-
     @Override
-    public void showFailedKirim(String title, String errorMessage) {
-
+    public void showData(MoviesResponse data) {
+        response = data.getResults();
+        mdialog.dismiss();
+        setUpRecyclerGrid();
     }
 
     @Override
-    public void showSuksesKirim(String message) {
+    public void setUpRecyclerGrid() {
+        recyclerViewGrid.setUpAsGrid(2);
+        recyclerViewGrid.addItemDecoration(new GridHeaderSpacingItemDecoration(2, 0, true, true));
+        recyclerViewGrid.setAdapter(adapter);
+        recyclerViewGrid.setHasFixedSize(true);
+        recyclerViewGrid.setPullRefreshEnabled(false);
+        recyclerViewGrid.setLoadingMoreEnabled(false);
+        recyclerViewGrid.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                presenter.getMovies();
+            }
 
+            @Override
+            public void onLoadMore() {
+            }
+        });
+
+        adapter.setOnItemClickListener((view, i) -> {
+//            ClubAnotherResponse selectedItem = adapter.getDatas().get(i - 1);
+//            DetailKomunitasActivity.start(getContext(), selectedItem.getIdClub());
+        });
     }
+
 
     @Override
     public void onNullInstanceSdk() {
@@ -139,6 +178,11 @@ public class HomeFragment extends Fragment implements DashboardView {
 
     @Override
     public void showLoading(boolean isShow, int loadingType) {
+
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
 
     }
 }

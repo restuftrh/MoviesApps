@@ -1,9 +1,10 @@
 package com.MovieApps.data.remote;
 
 import com.MovieApps.model.common.ApiResponse;
+import com.MovieApps.model.movies.MoviesResponse;
 
 
-
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.http.Body;
@@ -19,10 +20,7 @@ public interface ApiService {
     /* > Auth */
     /* --------------------------------------------------- */
 
-    @Multipart
-    @POST("/api/user/photo")
-    Observable<ApiResponse>
-    uploadPhoto(@Part MultipartBody.Part photo);
-
-
+    @GET("movies")
+    Observable<MoviesResponse>
+    getMovies();
 }
