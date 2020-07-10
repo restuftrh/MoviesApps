@@ -1,29 +1,27 @@
 package com.MovieApps.view.fragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.MovieApps.model.favorite.FavoriteMoviesParam;
 import com.MovieApps.model.movies.ListMoviesResponse;
 import com.MovieApps.model.movies.MoviesResponse;
+import com.MovieApps.view.favorite.FavoriteActivity;
 import com.MovieApps.view.fragment.Adapter.MoviesGridAdapter;
 import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
 import com.MovieApps.widget.GridHeaderSpacingItemDecoration;
 import com.bluelinelabs.conductor.ChangeHandlerFrameLayout;
 import com.bluelinelabs.conductor.Controller;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.MovieApps.R;
 import com.MovieApps.data.local.PreferencesHelper;
 import com.MovieApps.di.component.ActivityComponent;
@@ -32,6 +30,7 @@ import com.MovieApps.view.AppBaseActivity;
 import com.MovieApps.view.fragment.views.DashboardView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import net.derohimat.baseapp.ui.view.BaseImageView;
 import net.derohimat.baseapp.ui.view.BaseRecyclerView;
 
 import java.util.ArrayList;
@@ -41,7 +40,6 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import lecho.lib.hellocharts.model.ComboLineColumnChartData;
 
 public class HomeFragment extends Fragment implements DashboardView {
 
@@ -52,12 +50,14 @@ public class HomeFragment extends Fragment implements DashboardView {
 
     BaseRecyclerView recyclerViewGrid;
     SwipeRefreshLayout swipeRefresh;
+    BaseImageView image;
 
     @Bind(com.MovieApps.R.id.main_child_container) ChangeHandlerFrameLayout childContainer;
 
     ProgressDialog mdialog;
 
     private List<ListMoviesResponse> response;
+    private List<FavoriteMoviesParam> favoriteMovies = new ArrayList<>();
 
     public static void start(Context context) {
         context.startActivity(new Intent(
@@ -79,8 +79,14 @@ public class HomeFragment extends Fragment implements DashboardView {
 
         recyclerViewGrid = view.findViewById(R.id.recyle_row);
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
+        image = view.findViewById(R.id.image_favoritePage);
 
         presenter.getMovies();
+
+        if (preferencesHelper.getFavoriteMovies() != null){
+            favoriteMovies = preferencesHelper.getFavoriteMovies();
+        }
+
 
         mdialog = new ProgressDialog(getContext());
         mdialog.setMessage("Please Wait");
@@ -91,6 +97,13 @@ public class HomeFragment extends Fragment implements DashboardView {
             public void onRefresh() {
                 adapter.clear();
                 presenter.getMovies();
+            }
+        });
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FavoriteActivity.start(getContext());
             }
         });
 
@@ -181,10 +194,27 @@ public class HomeFragment extends Fragment implements DashboardView {
         });
 
         adapter.setOnItemClickListener((view, i) -> {
-//            ClubAnotherResponse selectedItem = adapter.getDatas().get(i - 1);
-//            DetailKomunitasActivity.start(getContext(), selectedItem.getIdClub());
+            new AlertDialog.Builder(getContext())
+                    .setMessage("apakah anda ingin membookmark/unbookmark item?")
+                    .setPositiveButton("Ya", (dialog, whichButton) -> {
+                        FavoriteMoviesParam eachData = new FavoriteMoviesParam(
+                                response.get(i - 1).getPopularity(),response.get(i - 1).getVote_count(),response.get(i - 1).getVideo(),
+                                response.get(i - 1).getPoster_path(),response.get(i - 1).getGenre_ids()[0],response.get(i - 1).getId(),
+                                1,response.get(i - 1).getAdult(),response.get(i - 1).getBackdrop_path(),response.get(i - 1).getOriginal_language(),
+                                response.get(i - 1).getOriginal_title(),response.get(i - 1).getTitle(),response.get(i - 1).getVote_average(),
+                                response.get(i - 1).getOverview(),response.get(i - 1).getRelease_date()
+                        );
+                        favoriteMovies.add(eachData);
+                        PreferencesHelper.deleteFavoriteMovie();
+                        preferencesHelper.saveFavoriteMovies(favoriteMovies);
+                        dialog.dismiss();
+                    })
+                    .setNegativeButton("Tidak", (dialog, whichButton) -> dialog.dismiss())
+                    .show();
         });
     }
+
+
 
 
     @Override

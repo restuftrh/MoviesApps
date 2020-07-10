@@ -1,4 +1,4 @@
-package com.MovieApps.view.fragment.Adapter;
+package com.MovieApps.view.favorite;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.MovieApps.R;
-import com.MovieApps.model.movies.ListMoviesResponse;
+import com.MovieApps.model.favorite.FavoriteMoviesParam;
 import com.bumptech.glide.Glide;
 
 import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
@@ -19,9 +19,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, MoviesGridAdapter.ViewHolder> {
+public class FavoriteMoviesGridAdapter extends BaseRecyclerAdapter<FavoriteMoviesParam, FavoriteMoviesGridAdapter.ViewHolder> {
     @Inject
-    public MoviesGridAdapter(Context context) {
+    public FavoriteMoviesGridAdapter(Context context) {
         super(context);
     }
 
@@ -31,15 +31,15 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
     }
 
     @Override
-    public MoviesGridAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new MoviesGridAdapter.ViewHolder(
+    public FavoriteMoviesGridAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        return new FavoriteMoviesGridAdapter.ViewHolder(
                 getView(viewGroup, i),
                 mItemClickListener,
                 mLongItemClickListener
         );
     }
 
-    static class ViewHolder extends BaseItemViewHolder<ListMoviesResponse> {
+    static class ViewHolder extends BaseItemViewHolder<FavoriteMoviesParam> {
 
         @Bind(R.id.bg_row) RelativeLayout bgColor;
         @Bind(R.id.score_row) TextView score;
@@ -50,7 +50,7 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
         @Bind(R.id.gendre_row) TextView gendre;
         @Bind(R.id.overview_row) TextView overview;
 
-        public ViewHolder(View itemView, BaseRecyclerAdapter.OnItemClickListener itemClickListener, BaseRecyclerAdapter.OnLongItemClickListener longItemClickListener) {
+        public ViewHolder(View itemView, OnItemClickListener itemClickListener, OnLongItemClickListener longItemClickListener) {
             super(itemView, itemClickListener, longItemClickListener);
         }
 
@@ -58,7 +58,7 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
 
 
         @Override
-        public void bind(ListMoviesResponse data) {
+        public void bind(FavoriteMoviesParam data) {
             if(Double.valueOf(data.getVote_average()) <= 10){
                 if (Double.valueOf(data.getVote_average()) >= 8){
                     score.setText("A");
@@ -75,16 +75,16 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
                 }
             }
 
-            if (data.getGenre_ids()[0] == 1){
+            if (data.getGenre_ids() == 1){
                 gendre.setText("Action");
                 bgColor.setBackgroundColor(Color.parseColor("#e31102"));
-            }else  if(data.getGenre_ids()[0] == 2){
+            }else  if(data.getGenre_ids() == 2){
                 gendre.setText("Drama");
                 bgColor.setBackgroundColor(Color.parseColor("#1a8cff"));
-            }else  if(data.getGenre_ids()[0] == 3){
+            }else  if(data.getGenre_ids() == 3){
                 gendre.setText("Comedy");
                 bgColor.setBackgroundColor(Color.parseColor("#27d604"));
-            }else  if(data.getGenre_ids()[0] == 4){
+            }else  if(data.getGenre_ids() == 4){
                 gendre.setText("Animation");
                 bgColor.setBackgroundColor(Color.parseColor("#fff317"));
             }else {
@@ -98,8 +98,10 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
             date.setText(data.getRelease_date());
             overview.setText(data.getOverview());
 
+
+
+
         }
     }
-
 }
 

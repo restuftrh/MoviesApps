@@ -3,6 +3,7 @@ package com.MovieApps.data.local;
 import android.content.Context;
 
 
+import com.MovieApps.model.favorite.FavoriteMoviesParam;
 import com.orhanobut.hawk.BuildConfig;
 import com.orhanobut.hawk.Hawk;
 import com.orhanobut.hawk.HawkBuilder;
@@ -10,10 +11,13 @@ import com.orhanobut.hawk.LogLevel;
 
 import net.derohimat.baseapp.util.BasePreferenceUtils;
 
+import java.util.List;
+
 
 public class PreferencesHelper extends BasePreferenceUtils {
 
     private static final String KEY_TOKEN = "Key.DeviceToken";
+    private static final String KEY_FAVORITE_MOVIES = "Key.FavoriteMovies";
 
     public PreferencesHelper(Context context) {
         Hawk.init(context)
@@ -23,10 +27,6 @@ public class PreferencesHelper extends BasePreferenceUtils {
                 .build();
     }
 
-    /* --------------------------------------------------- */
-    /* > Login Response */
-    /* --------------------------------------------------- */
-
 
     public void saveDeviceToken(String token) {
         Hawk.put(KEY_TOKEN, token);
@@ -34,6 +34,18 @@ public class PreferencesHelper extends BasePreferenceUtils {
 
     public String getDeviceToken() {
         return Hawk.get(KEY_TOKEN);
+    }
+
+    public void saveFavoriteMovies(List<FavoriteMoviesParam> favoriteMovies) {
+        Hawk.put(KEY_FAVORITE_MOVIES, favoriteMovies);
+    }
+
+    public static void deleteFavoriteMovie() {
+        Hawk.remove(KEY_FAVORITE_MOVIES);
+    }
+
+    public List<FavoriteMoviesParam> getFavoriteMovies() {
+        return Hawk.get(KEY_FAVORITE_MOVIES);
     }
 
 

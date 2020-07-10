@@ -1,5 +1,6 @@
 package com.MovieApps.view.fragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.MovieApps.model.movies.MoviesResponse;
 import com.MovieApps.model.series.ListSeriesResponse;
 import com.MovieApps.model.series.SeriesResponse;
 import com.MovieApps.view.AppBaseActivity;
+import com.MovieApps.view.favorite.FavoriteActivity;
 import com.MovieApps.view.fragment.Adapter.MoviesGridAdapter;
 import com.MovieApps.view.fragment.Adapter.SeriesGridAdapter;
 import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
@@ -32,6 +34,7 @@ import com.bluelinelabs.conductor.ChangeHandlerFrameLayout;
 import com.bluelinelabs.conductor.Controller;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import net.derohimat.baseapp.ui.view.BaseImageView;
 import net.derohimat.baseapp.ui.view.BaseRecyclerView;
 
 import java.util.ArrayList;
@@ -51,6 +54,7 @@ public class SeriesFragment extends Fragment implements SeriesView {
 
     BaseRecyclerView recyclerViewGrid;
     SwipeRefreshLayout swipeRefresh;
+    BaseImageView image;
 
     @Bind(R.id.main_child_container) ChangeHandlerFrameLayout childContainer;
 
@@ -78,6 +82,7 @@ public class SeriesFragment extends Fragment implements SeriesView {
 
         recyclerViewGrid = view.findViewById(R.id.recyle_row);
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
+        image = view.findViewById(R.id.image_favoritePage);
 
         presenter.getSeries();
 
@@ -90,6 +95,13 @@ public class SeriesFragment extends Fragment implements SeriesView {
             public void onRefresh() {
                 adapter.clear();
                 presenter.getSeries();
+            }
+        });
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FavoriteActivity.start(getContext());
             }
         });
 
@@ -181,9 +193,19 @@ public class SeriesFragment extends Fragment implements SeriesView {
         });
 
         adapter.setOnItemClickListener((view, i) -> {
-//            ClubAnotherResponse selectedItem = adapter.getDatas().get(i - 1);
-//            DetailKomunitasActivity.start(getContext(), selectedItem.getIdClub());
+            popUp();
         });
+    }
+
+    private void popUp() {
+        new AlertDialog.Builder(getContext())
+                .setMessage("apakah anda ingin membookmark/unbookmark item?")
+                .setPositiveButton("Ya", (dialog, whichButton) -> {
+                    dialog.dismiss();
+//                    LoginActivity.start(getActivity());
+                })
+                .setNegativeButton("Tidak", (dialog, whichButton) -> dialog.dismiss())
+                .show();
     }
 
 

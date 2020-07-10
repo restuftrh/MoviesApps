@@ -36,6 +36,7 @@
                     android:layout_weight="1"/>
 
                 <net.derohimat.baseapp.ui.view.BaseImageView
+                    android:id="@+id/image_favoritePage"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_star"/>

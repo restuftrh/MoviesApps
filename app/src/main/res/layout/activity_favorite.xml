@@ -26,22 +26,21 @@
                 android:padding="@dimen/spacing_10"
                 android:gravity="center">
 
+                <net.derohimat.baseapp.ui.view.BaseImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="@dimen/spacing_10"
+                    android:src="@drawable/ic_arrow_back_white"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dashboard"
+                    android:text="Favorite"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_weight="1"/>
-
-                <net.derohimat.baseapp.ui.view.BaseImageView
-                    android:id="@+id/image_favoritePage"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_star"/>
-
-
 
             </LinearLayout>
 
@@ -52,6 +51,7 @@
                 android:layout_margin="5dp">
 
             </net.derohimat.baseapp.ui.view.BaseRecyclerView>
+
 
 
         </LinearLayout>

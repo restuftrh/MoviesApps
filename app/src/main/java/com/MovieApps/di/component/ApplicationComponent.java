@@ -9,6 +9,7 @@ import com.MovieApps.data.remote.UnauthorisedInterceptor;
 import com.MovieApps.di.module.ApplicationModule;
 import com.MovieApps.di.module.NetworkModule;
 import com.MovieApps.di.qualifiers.AppContext;
+import com.MovieApps.view.favorite.FavoritePresenter;
 import com.MovieApps.view.fragment.HomeFragment;
 import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
 import com.MovieApps.view.fragment.presenter.FragmentSeriesPresenter;
@@ -27,6 +28,7 @@ public  interface ApplicationComponent {
     void inject(UnauthorisedInterceptor interceptor);
     void inject(FragmentDashboardPresenter presenter);
     void inject(FragmentSeriesPresenter presenter);
+    void inject(FavoritePresenter presenter);
 
 
 

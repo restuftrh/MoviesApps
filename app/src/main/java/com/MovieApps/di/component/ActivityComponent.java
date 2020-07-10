@@ -3,6 +3,8 @@ package com.MovieApps.di.component;
 import com.MovieApps.di.module.ActivityModule;
 import com.MovieApps.di.scopes.ActivityScope;
 import com.MovieApps.view.AppBaseActivity;
+import com.MovieApps.view.favorite.FavoriteActivity;
+import com.MovieApps.view.favorite.FavoriteController;
 import com.MovieApps.view.fragment.HomeFragment;
 import com.MovieApps.view.fragment.SeriesFragment;
 import com.MovieApps.view.main.MainActivity;
@@ -18,6 +20,7 @@ public interface ActivityComponent extends ApplicationComponent {
     void inject(AppBaseActivity baseActivity);
     void inject(MainActivity activity);
     void inject(SplashActivity activity);
+    void inject(FavoriteActivity activity);
 
 
     /* --------------------------------------------------- */
@@ -25,6 +28,7 @@ public interface ActivityComponent extends ApplicationComponent {
     /* --------------------------------------------------- */
 
     void inject (MainController controller);
+    void inject (FavoriteController controller);
 
     /* --------------------------------------------------- */
     /* > Subcomponent */
