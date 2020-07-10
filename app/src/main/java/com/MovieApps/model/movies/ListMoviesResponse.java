@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ public class ListMoviesResponse implements Parcelable {
     @SerializedName("vote_count") private int vote_count;
     @SerializedName("video") private String video;
     @SerializedName("poster_path") private String poster_path;
+    @SerializedName("genre_ids") private int[] genre_ids;
     @SerializedName("id") private int id;
     @SerializedName("adult") private String adult;
     @SerializedName("backdrop_path") private String backdrop_path;
@@ -26,11 +28,13 @@ public class ListMoviesResponse implements Parcelable {
     @SerializedName("release_date") private String release_date;
 
 
+
     protected ListMoviesResponse(Parcel in) {
         popularity = in.readString();
         vote_count = in.readInt();
         video = in.readString();
         poster_path = in.readString();
+        genre_ids = in.createIntArray();
         id = in.readInt();
         adult = in.readString();
         backdrop_path = in.readString();
@@ -48,6 +52,7 @@ public class ListMoviesResponse implements Parcelable {
         dest.writeInt(vote_count);
         dest.writeString(video);
         dest.writeString(poster_path);
+        dest.writeIntArray(genre_ids);
         dest.writeInt(id);
         dest.writeString(adult);
         dest.writeString(backdrop_path);
@@ -94,6 +99,14 @@ public class ListMoviesResponse implements Parcelable {
 
     public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
+    }
+
+    public int[] getGenre_ids() {
+        return genre_ids;
+    }
+
+    public void setGenre_ids(int[] genre_ids) {
+        this.genre_ids = genre_ids;
     }
 
     public int getId() {
@@ -167,7 +180,6 @@ public class ListMoviesResponse implements Parcelable {
     public void setRelease_date(String release_date) {
         this.release_date = release_date;
     }
-
     public static final Creator<ListMoviesResponse> CREATOR = new Creator<ListMoviesResponse>() {
         @Override
         public ListMoviesResponse createFromParcel(Parcel in) {

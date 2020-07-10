@@ -11,6 +11,7 @@ import com.MovieApps.di.module.NetworkModule;
 import com.MovieApps.di.qualifiers.AppContext;
 import com.MovieApps.view.fragment.HomeFragment;
 import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
+import com.MovieApps.view.fragment.presenter.FragmentSeriesPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -25,6 +26,7 @@ public  interface ApplicationComponent {
     void inject(CrsApp app);
     void inject(UnauthorisedInterceptor interceptor);
     void inject(FragmentDashboardPresenter presenter);
+    void inject(FragmentSeriesPresenter presenter);
 
 
 

@@ -4,6 +4,7 @@ import com.MovieApps.di.module.ActivityModule;
 import com.MovieApps.di.scopes.ActivityScope;
 import com.MovieApps.view.AppBaseActivity;
 import com.MovieApps.view.fragment.HomeFragment;
+import com.MovieApps.view.fragment.SeriesFragment;
 import com.MovieApps.view.main.MainActivity;
 import com.MovieApps.view.main.MainController;
 import com.MovieApps.view.splash.SplashActivity;
@@ -34,6 +35,7 @@ public interface ActivityComponent extends ApplicationComponent {
     /* ---------------------------------------------------- */
 
     void inject(HomeFragment fragment);
+    void inject(SeriesFragment fragment);
 
     ControllerComponent.Builder controllerComponent();
 }

@@ -12,6 +12,7 @@ public class ListSeriesResponse implements Parcelable {
     @SerializedName("popularity") private String popularity;
     @SerializedName("vote_count") private String vote_count;
     @SerializedName("first_air_date") private String first_air_date;
+    @SerializedName("genre_ids") private int[] genre_ids;
     @SerializedName("backdrop_path") private String backdrop_path;
     @SerializedName("original_language") private String original_language;
     @SerializedName("id") private int id;
@@ -26,6 +27,7 @@ public class ListSeriesResponse implements Parcelable {
         popularity = in.readString();
         vote_count = in.readString();
         first_air_date = in.readString();
+        genre_ids = in.createIntArray();
         backdrop_path = in.readString();
         original_language = in.readString();
         id = in.readInt();
@@ -41,6 +43,7 @@ public class ListSeriesResponse implements Parcelable {
         dest.writeString(popularity);
         dest.writeString(vote_count);
         dest.writeString(first_air_date);
+        dest.writeIntArray(genre_ids);
         dest.writeString(backdrop_path);
         dest.writeString(original_language);
         dest.writeInt(id);
@@ -92,6 +95,14 @@ public class ListSeriesResponse implements Parcelable {
 
     public void setFirst_air_date(String first_air_date) {
         this.first_air_date = first_air_date;
+    }
+
+    public int[] getGenre_ids() {
+        return genre_ids;
+    }
+
+    public void setGenre_ids(int[] genre_ids) {
+        this.genre_ids = genre_ids;
     }
 
     public String getBackdrop_path() {

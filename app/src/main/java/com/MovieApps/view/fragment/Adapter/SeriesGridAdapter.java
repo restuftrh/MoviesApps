@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.MovieApps.R;
 import com.MovieApps.model.movies.ListMoviesResponse;
+import com.MovieApps.model.series.ListSeriesResponse;
 import com.bumptech.glide.Glide;
 
 import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
@@ -19,9 +20,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, MoviesGridAdapter.ViewHolder> {
+public class SeriesGridAdapter extends BaseRecyclerAdapter<ListSeriesResponse, SeriesGridAdapter.ViewHolder> {
     @Inject
-    public MoviesGridAdapter(Context context) {
+    public SeriesGridAdapter(Context context) {
         super(context);
     }
 
@@ -31,15 +32,15 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
     }
 
     @Override
-    public MoviesGridAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new MoviesGridAdapter.ViewHolder(
+    public SeriesGridAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        return new SeriesGridAdapter.ViewHolder(
                 getView(viewGroup, i),
                 mItemClickListener,
                 mLongItemClickListener
         );
     }
 
-    static class ViewHolder extends BaseItemViewHolder<ListMoviesResponse> {
+    static class ViewHolder extends BaseItemViewHolder<ListSeriesResponse> {
 
         @Bind(R.id.bg_row) RelativeLayout bgColor;
         @Bind(R.id.score_row) TextView score;
@@ -50,7 +51,7 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
         @Bind(R.id.gendre_row) TextView gendre;
         @Bind(R.id.overview_row) TextView overview;
 
-        public ViewHolder(View itemView, BaseRecyclerAdapter.OnItemClickListener itemClickListener, BaseRecyclerAdapter.OnLongItemClickListener longItemClickListener) {
+        public ViewHolder(View itemView, OnItemClickListener itemClickListener, OnLongItemClickListener longItemClickListener) {
             super(itemView, itemClickListener, longItemClickListener);
         }
 
@@ -58,7 +59,7 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
 
 
         @Override
-        public void bind(ListMoviesResponse data) {
+        public void bind(ListSeriesResponse data) {
             if(Double.valueOf(data.getVote_average()) <= 10){
                 if (Double.valueOf(data.getVote_average()) >= 8){
                     score.setText("A");
@@ -94,8 +95,8 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
 
             Glide.with(getContext()).load("https://image.tmdb.org/t/p/w500/" + data.getPoster_path()).into(image);
             rating.setText(data.getVote_average());
-            title.setText(data.getTitle());
-            date.setText(data.getRelease_date());
+            title.setText(data.getName());
+            date.setText(data.getFirst_air_date());
             overview.setText(data.getOverview());
 
 

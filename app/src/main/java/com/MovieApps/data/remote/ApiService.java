@@ -2,6 +2,7 @@ package com.MovieApps.data.remote;
 
 import com.MovieApps.model.common.ApiResponse;
 import com.MovieApps.model.movies.MoviesResponse;
+import com.MovieApps.model.series.SeriesResponse;
 
 
 import java.util.List;
@@ -23,4 +24,8 @@ public interface ApiService {
     @GET("movies")
     Observable<MoviesResponse>
     getMovies();
+
+    @GET("tvs")
+    Observable<SeriesResponse>
+    getSeries();
 }

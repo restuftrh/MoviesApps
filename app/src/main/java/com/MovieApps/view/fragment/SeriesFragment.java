@@ -3,33 +3,33 @@ package com.MovieApps.view.fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.MovieApps.model.movies.ListMoviesResponse;
-import com.MovieApps.model.movies.MoviesResponse;
-import com.MovieApps.view.fragment.Adapter.MoviesGridAdapter;
-import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
-import com.MovieApps.widget.GridHeaderSpacingItemDecoration;
-import com.bluelinelabs.conductor.ChangeHandlerFrameLayout;
-import com.bluelinelabs.conductor.Controller;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.MovieApps.R;
 import com.MovieApps.data.local.PreferencesHelper;
 import com.MovieApps.di.component.ActivityComponent;
 import com.MovieApps.model.common.ApiResponse;
+import com.MovieApps.model.movies.ListMoviesResponse;
+import com.MovieApps.model.movies.MoviesResponse;
+import com.MovieApps.model.series.ListSeriesResponse;
+import com.MovieApps.model.series.SeriesResponse;
 import com.MovieApps.view.AppBaseActivity;
+import com.MovieApps.view.fragment.Adapter.MoviesGridAdapter;
+import com.MovieApps.view.fragment.Adapter.SeriesGridAdapter;
+import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
+import com.MovieApps.view.fragment.presenter.FragmentSeriesPresenter;
 import com.MovieApps.view.fragment.views.DashboardView;
+import com.MovieApps.view.fragment.views.SeriesView;
+import com.MovieApps.widget.GridHeaderSpacingItemDecoration;
+import com.bluelinelabs.conductor.ChangeHandlerFrameLayout;
+import com.bluelinelabs.conductor.Controller;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import net.derohimat.baseapp.ui.view.BaseRecyclerView;
@@ -41,28 +41,27 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import lecho.lib.hellocharts.model.ComboLineColumnChartData;
 
-public class HomeFragment extends Fragment implements DashboardView {
+public class SeriesFragment extends Fragment implements SeriesView {
 
 
     @Inject PreferencesHelper preferencesHelper;
-    @Inject FragmentDashboardPresenter presenter;
-    @Inject MoviesGridAdapter adapter;
+    @Inject FragmentSeriesPresenter presenter;
+    @Inject SeriesGridAdapter adapter;
 
     BaseRecyclerView recyclerViewGrid;
     SwipeRefreshLayout swipeRefresh;
 
-    @Bind(com.MovieApps.R.id.main_child_container) ChangeHandlerFrameLayout childContainer;
+    @Bind(R.id.main_child_container) ChangeHandlerFrameLayout childContainer;
 
     ProgressDialog mdialog;
 
-    private List<ListMoviesResponse> response;
+    private List<ListSeriesResponse> response;
 
     public static void start(Context context) {
         context.startActivity(new Intent(
                 context,
-                HomeFragment.class
+                SeriesFragment.class
         ));
     }
 
@@ -71,16 +70,16 @@ public class HomeFragment extends Fragment implements DashboardView {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_series, container, false);
 
-        presenter = new FragmentDashboardPresenter(this, this, getContext());
+        presenter = new FragmentSeriesPresenter(this, this, getContext());
         getActivityComponent().inject(this);
         bindPresenter(this, presenter);
 
         recyclerViewGrid = view.findViewById(R.id.recyle_row);
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
 
-        presenter.getMovies();
+        presenter.getSeries();
 
         mdialog = new ProgressDialog(getContext());
         mdialog.setMessage("Please Wait");
@@ -90,7 +89,7 @@ public class HomeFragment extends Fragment implements DashboardView {
             @Override
             public void onRefresh() {
                 adapter.clear();
-                presenter.getMovies();
+                presenter.getSeries();
             }
         });
 
@@ -105,7 +104,7 @@ public class HomeFragment extends Fragment implements DashboardView {
         return absDriverAct.getComponent();
     }
 
-    public void bindPresenter(DashboardView mvpView, FragmentDashboardPresenter presenter) {
+    public void bindPresenter(SeriesView mvpView, FragmentSeriesPresenter presenter) {
         presenter.attachView(mvpView);
 
         addLifecycleListener(new Controller.LifecycleListener() {
@@ -152,7 +151,7 @@ public class HomeFragment extends Fragment implements DashboardView {
     }
 
     @Override
-    public void showData(MoviesResponse data) {
+    public void showData(SeriesResponse data) {
         response = data.getResults();
         mdialog.dismiss();
         adapter.clear();
@@ -160,6 +159,7 @@ public class HomeFragment extends Fragment implements DashboardView {
         swipeRefresh.setRefreshing(false);
         setUpRecyclerGrid();
     }
+
 
     @Override
     public void setUpRecyclerGrid() {
@@ -172,7 +172,7 @@ public class HomeFragment extends Fragment implements DashboardView {
         recyclerViewGrid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                presenter.getMovies();
+                presenter.getSeries();
             }
 
             @Override

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.MovieApps.view.fragment.SeriesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import android.view.MenuItem;
@@ -79,11 +81,7 @@ public class MainController extends AbsController implements MainView, BottomNav
             if (sortcut == 0){
                 bottomNavigationView.setSelectedItemId(R.id.home_menu);
             }else if(sortcut == 1){
-//                bottomNavigationView.setSelectedItemId(R.id.approval_menu);
-            }else if(sortcut == 2){
-//                bottomNavigationView.setSelectedItemId(R.id.laporan_menu);
-            }else if(sortcut == 3){
-                bottomNavigationView.setSelectedItemId(R.id.profile_bot_nav);
+                bottomNavigationView.setSelectedItemId(R.id.series_bot_nav);
             }
         }
 
@@ -119,13 +117,7 @@ public class MainController extends AbsController implements MainView, BottomNav
                 fragment = new HomeFragment();
                 break;
             case 1:
-//                fragment = new ApprovalFragment();
-                break;
-            case 2:
-//                fragment = new LaporanFragment();
-                break;
-            case 3:
-//                fragment = new AccountFragment();
+                fragment = new SeriesFragment();
                 break;
             default:
                 fragment = null;
@@ -146,8 +138,8 @@ public class MainController extends AbsController implements MainView, BottomNav
             case R.id.home_menu:
                 changeView(0);
                 break;
-            case R.id.profile_bot_nav:
-                changeView(3);
+            case R.id.series_bot_nav:
+                changeView(1);
                 break;
         }
         return true;
