@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        fontPath="fonts/robotoreguler.ttf"
+        tools:ignore="MissingPrefix"
+        android:id="@+id/sortby_nama"
+        android:title="Sort By Name" />
+
+    <item
+        fontPath="fonts/robotoreguler.ttf"
+        tools:ignore="MissingPrefix"
+        android:id="@+id/sortby_gendre"
+        android:title="Sort By Gendre"/>
+
+    <item
+        fontPath="fonts/robotoreguler.ttf"
+        tools:ignore="MissingPrefix"
+        android:id="@+id/sortby_score"
+        android:title="Sort By Score"/>
+
+    <item
+        fontPath="fonts/robotoreguler.ttf"
+        tools:ignore="MissingPrefix"
+        android:id="@+id/sortby_date"
+        android:title="Sort By Date"/>
+</menu>

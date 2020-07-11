@@ -40,6 +40,7 @@ public class MainController extends AbsController implements MainView, BottomNav
 
     private int sortcut = NULL;
 
+
     public MainController(Bundle args) {
         super(args);
     }

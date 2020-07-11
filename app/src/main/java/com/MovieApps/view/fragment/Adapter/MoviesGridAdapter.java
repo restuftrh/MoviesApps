@@ -9,16 +9,13 @@ import android.widget.TextView;
 
 import com.MovieApps.R;
 import com.MovieApps.data.local.PreferencesHelper;
-import com.MovieApps.model.favorite.FavoriteMoviesParam;
+import com.MovieApps.model.favorite.FavoriteParam;
 import com.MovieApps.model.movies.ListMoviesResponse;
 import com.bumptech.glide.Glide;
 
 import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
 import net.derohimat.baseapp.ui.adapter.viewholder.BaseItemViewHolder;
 import net.derohimat.baseapp.ui.view.BaseImageView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -65,9 +62,9 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
 
         @Override
         public void bind(ListMoviesResponse data) {
-            if (PreferencesHelper.getFavoriteMovies() != null){
-                for (int j=0; j<PreferencesHelper.getFavoriteMovies().size(); j++) {
-                    FavoriteMoviesParam eachMoviest = PreferencesHelper.getFavoriteMovies().get(j);
+            if (PreferencesHelper.getFavorite() != null){
+                for (int j=0; j<PreferencesHelper.getFavorite().size(); j++) {
+                    FavoriteParam eachMoviest = PreferencesHelper.getFavorite().get(j);
                     if (data.getId() == eachMoviest.getId()) {
                         favorite.setVisibility(View.VISIBLE);
                         break;
@@ -78,16 +75,16 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
 
             }
 
-            if(Double.valueOf(data.getVote_average()) <= 10){
-                if (Double.valueOf(data.getVote_average()) >= 8){
+            if(Float.valueOf(data.getVote_average()) <= 10){
+                if (Float.valueOf(data.getVote_average()) >= 8){
                     score.setText("A");
-                }else if(Double.valueOf(data.getVote_average()) <= 7){
-                    if (Double.valueOf(data.getVote_average()) >= 6){
+                }else if(Float.valueOf(data.getVote_average()) < 8){
+                    if (Float.valueOf(data.getVote_average()) >= 6){
                         score.setText("B");
-                    }else if (Double.valueOf(data.getVote_average()) <= 5){
-                        if (Double.valueOf(data.getVote_average()) >= 4){
+                    }else if (Float.valueOf(data.getVote_average()) < 6){
+                        if (Float.valueOf(data.getVote_average()) >= 4){
                             score.setText("C");
-                        }else if (Double.valueOf(data.getVote_average()) < 4){
+                        }else if (Float.valueOf(data.getVote_average()) < 4){
                             score.setText("D");
                         }
                     }

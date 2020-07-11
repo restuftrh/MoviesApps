@@ -133,8 +133,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_pause" />
-                            <entry key="sourceFile" value="C:\Users\RestuFtrh\Downloads\pause.svg" />
+                            <entry key="outputName" value="ic_menu" />
+                            <entry key="sourceFile" value="C:\Users\RestuFtrh\Downloads\menu.svg" />
                           </map>
                         </option>
                       </PersistentState>

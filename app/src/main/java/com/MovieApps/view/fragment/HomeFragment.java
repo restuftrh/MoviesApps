@@ -13,10 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.MovieApps.model.favorite.FavoriteMoviesParam;
+import com.MovieApps.model.favorite.FavoriteParam;
 import com.MovieApps.model.movies.ListMoviesResponse;
 import com.MovieApps.model.movies.MoviesResponse;
-import com.MovieApps.util.Toasts;
 import com.MovieApps.view.favorite.FavoriteActivity;
 import com.MovieApps.view.fragment.Adapter.MoviesGridAdapter;
 import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
@@ -58,8 +57,8 @@ public class HomeFragment extends Fragment implements DashboardView {
     ProgressDialog mdialog;
 
     private List<ListMoviesResponse> response;
-    private List<FavoriteMoviesParam> favoriteMovies = new ArrayList<>();
-    private List<FavoriteMoviesParam> selectedMovies = new ArrayList<>();
+    private List<FavoriteParam> favoriteMovies = new ArrayList<>();
+    private List<FavoriteParam> selectedMovies = new ArrayList<>();
 
     public static void start(Context context) {
         context.startActivity(new Intent(
@@ -85,8 +84,8 @@ public class HomeFragment extends Fragment implements DashboardView {
 
         presenter.getMovies();
 
-        if (preferencesHelper.getFavoriteMovies() != null){
-            favoriteMovies = preferencesHelper.getFavoriteMovies();
+        if (preferencesHelper.getFavorite() != null){
+            favoriteMovies = preferencesHelper.getFavorite();
         }
 
 
@@ -105,7 +104,7 @@ public class HomeFragment extends Fragment implements DashboardView {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavoriteActivity.start(getContext());
+                FavoriteActivity.start(getContext(), 1);
             }
         });
 
@@ -202,39 +201,35 @@ public class HomeFragment extends Fragment implements DashboardView {
                         if (favoriteMovies.size() > 0){
                             selectedMovies.clear();
                             for (int j=0; j<favoriteMovies.size(); j++) {
-                                FavoriteMoviesParam eachMoviest = favoriteMovies.get(j);
+                                FavoriteParam eachMoviest = favoriteMovies.get(j);
                                 if (response.get(i - 1).getId() == eachMoviest.getId()) {
                                     selectedMovies.add(eachMoviest);
                                     favoriteMovies.remove(eachMoviest);
-                                    PreferencesHelper.deleteFavoriteMovie();
-                                    preferencesHelper.saveFavoriteMovies(favoriteMovies);
+                                    PreferencesHelper.deleteFavorite();
+                                    preferencesHelper.saveFavorite(favoriteMovies);
                                     break;
                                 }
                             }
 
                             if (selectedMovies.size() == 0){
-                                FavoriteMoviesParam eachData = new FavoriteMoviesParam(
-                                        response.get(i - 1).getPopularity(),response.get(i - 1).getVote_count(),response.get(i - 1).getVideo(),
+                                FavoriteParam eachData = new FavoriteParam(
                                         response.get(i - 1).getPoster_path(),response.get(i - 1).getGenre_ids()[0],response.get(i - 1).getId(),
-                                        1,response.get(i - 1).getAdult(),response.get(i - 1).getBackdrop_path(),response.get(i - 1).getOriginal_language(),
                                         response.get(i - 1).getOriginal_title(),response.get(i - 1).getTitle(),response.get(i - 1).getVote_average(),
                                         response.get(i - 1).getOverview(),response.get(i - 1).getRelease_date()
                                 );
                                 favoriteMovies.add(eachData);
-                                PreferencesHelper.deleteFavoriteMovie();
-                                preferencesHelper.saveFavoriteMovies(favoriteMovies);
+                                PreferencesHelper.deleteFavorite();
+                                preferencesHelper.saveFavorite(favoriteMovies);
                             }
                         }else{
-                            FavoriteMoviesParam eachData = new FavoriteMoviesParam(
-                                    response.get(i - 1).getPopularity(),response.get(i - 1).getVote_count(),response.get(i - 1).getVideo(),
+                            FavoriteParam eachData = new FavoriteParam(
                                     response.get(i - 1).getPoster_path(),response.get(i - 1).getGenre_ids()[0],response.get(i - 1).getId(),
-                                    1,response.get(i - 1).getAdult(),response.get(i - 1).getBackdrop_path(),response.get(i - 1).getOriginal_language(),
                                     response.get(i - 1).getOriginal_title(),response.get(i - 1).getTitle(),response.get(i - 1).getVote_average(),
                                     response.get(i - 1).getOverview(),response.get(i - 1).getRelease_date()
                             );
                             favoriteMovies.add(eachData);
-                            PreferencesHelper.deleteFavoriteMovie();
-                            preferencesHelper.saveFavoriteMovies(favoriteMovies);
+                            PreferencesHelper.deleteFavorite();
+                            preferencesHelper.saveFavorite(favoriteMovies);
                         }
 
                         presenter.getMovies();

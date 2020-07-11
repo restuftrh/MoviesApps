@@ -8,8 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.MovieApps.R;
-import com.MovieApps.model.favorite.FavoriteMoviesParam;
-import com.MovieApps.model.favorite.FavoriteSeriesParam;
+import com.MovieApps.model.favorite.FavoriteParam;
 import com.bumptech.glide.Glide;
 
 import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
@@ -20,9 +19,9 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class FavoriteSeriesGridAdapter extends BaseRecyclerAdapter<FavoriteSeriesParam, FavoriteSeriesGridAdapter.ViewHolder> {
+public class FavoriteGridAdapter extends BaseRecyclerAdapter<FavoriteParam, FavoriteGridAdapter.ViewHolder> {
     @Inject
-    public FavoriteSeriesGridAdapter(Context context) {
+    public FavoriteGridAdapter(Context context) {
         super(context);
     }
 
@@ -32,15 +31,15 @@ public class FavoriteSeriesGridAdapter extends BaseRecyclerAdapter<FavoriteSerie
     }
 
     @Override
-    public FavoriteSeriesGridAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new FavoriteSeriesGridAdapter.ViewHolder(
+    public FavoriteGridAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        return new FavoriteGridAdapter.ViewHolder(
                 getView(viewGroup, i),
                 mItemClickListener,
                 mLongItemClickListener
         );
     }
 
-    static class ViewHolder extends BaseItemViewHolder<FavoriteSeriesParam> {
+    static class ViewHolder extends BaseItemViewHolder<FavoriteParam> {
 
         @Bind(R.id.bg_row) RelativeLayout bgColor;
         @Bind(R.id.score_row) TextView score;
@@ -60,7 +59,7 @@ public class FavoriteSeriesGridAdapter extends BaseRecyclerAdapter<FavoriteSerie
 
 
         @Override
-        public void bind(FavoriteSeriesParam data) {
+        public void bind(FavoriteParam data) {
             favorite.setVisibility(View.VISIBLE);
                 if(Double.valueOf(data.getVote_average()) <= 10){
                     if (Double.valueOf(data.getVote_average()) >= 8){
@@ -97,8 +96,8 @@ public class FavoriteSeriesGridAdapter extends BaseRecyclerAdapter<FavoriteSerie
 
                 Glide.with(getContext()).load("https://image.tmdb.org/t/p/w500/" + data.getPoster_path()).into(image);
                 rating.setText(data.getVote_average());
-                title.setText(data.getName());
-                date.setText(data.getFirst_air_date());
+                title.setText(data.getTitle());
+                date.setText(data.getRelease_date());
                 overview.setText(data.getOverview());
             }
 

@@ -7,14 +7,16 @@ import android.view.View;
 import androidx.appcompat.widget.Toolbar;
 
 import com.MovieApps.view.commons.ControllerActivity;
+import com.MovieApps.view.main.MainController;
 import com.bluelinelabs.conductor.Controller;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class FavoriteActivity extends ControllerActivity {
 
-    public static void start(Context context) {
+    public static void start(Context context, int id) {
         Intent intent = new Intent(context, FavoriteActivity.class);
+        intent.putExtra("id",id);
         context.startActivity(intent);
     }
 

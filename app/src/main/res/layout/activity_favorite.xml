@@ -42,16 +42,14 @@
                     android:textStyle="bold"
                     android:layout_weight="1"/>
 
-            </LinearLayout>
+                <net.derohimat.baseapp.ui.view.BaseImageView
+                    android:id="@+id/btnMenu"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="@dimen/spacing_10"
+                    android:src="@drawable/ic_menu"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Favorite Movies :"
-                android:textColor="@color/Black"
-                android:layout_margin="@dimen/spacing_10"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            </LinearLayout>
 
             <net.derohimat.baseapp.ui.view.BaseRecyclerView
                 android:id="@+id/recyle_row"
@@ -61,22 +59,6 @@
 
             </net.derohimat.baseapp.ui.view.BaseRecyclerView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Favorite Series :"
-                android:textColor="@color/Black"
-                android:layout_margin="@dimen/spacing_10"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <net.derohimat.baseapp.ui.view.BaseRecyclerView
-                android:id="@+id/recyle_row_series"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp">
-
-            </net.derohimat.baseapp.ui.view.BaseRecyclerView>
 
         </LinearLayout>
 

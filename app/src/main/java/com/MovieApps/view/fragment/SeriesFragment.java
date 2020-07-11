@@ -17,19 +17,13 @@ import com.MovieApps.R;
 import com.MovieApps.data.local.PreferencesHelper;
 import com.MovieApps.di.component.ActivityComponent;
 import com.MovieApps.model.common.ApiResponse;
-import com.MovieApps.model.favorite.FavoriteMoviesParam;
-import com.MovieApps.model.favorite.FavoriteSeriesParam;
-import com.MovieApps.model.movies.ListMoviesResponse;
-import com.MovieApps.model.movies.MoviesResponse;
+import com.MovieApps.model.favorite.FavoriteParam;
 import com.MovieApps.model.series.ListSeriesResponse;
 import com.MovieApps.model.series.SeriesResponse;
 import com.MovieApps.view.AppBaseActivity;
 import com.MovieApps.view.favorite.FavoriteActivity;
-import com.MovieApps.view.fragment.Adapter.MoviesGridAdapter;
 import com.MovieApps.view.fragment.Adapter.SeriesGridAdapter;
-import com.MovieApps.view.fragment.presenter.FragmentDashboardPresenter;
 import com.MovieApps.view.fragment.presenter.FragmentSeriesPresenter;
-import com.MovieApps.view.fragment.views.DashboardView;
 import com.MovieApps.view.fragment.views.SeriesView;
 import com.MovieApps.widget.GridHeaderSpacingItemDecoration;
 import com.bluelinelabs.conductor.ChangeHandlerFrameLayout;
@@ -63,8 +57,8 @@ public class SeriesFragment extends Fragment implements SeriesView {
     ProgressDialog mdialog;
 
     private List<ListSeriesResponse> response;
-    private List<FavoriteSeriesParam> favoriteSeries = new ArrayList<>();
-    private List<FavoriteSeriesParam> selectedSeries = new ArrayList<>();
+    private List<FavoriteParam> favoriteSeries = new ArrayList<>();
+    private List<FavoriteParam> selectedSeries = new ArrayList<>();
 
     public static void start(Context context) {
         context.startActivity(new Intent(
@@ -89,8 +83,8 @@ public class SeriesFragment extends Fragment implements SeriesView {
         image = view.findViewById(R.id.image_favoritePage);
 
         presenter.getSeries();
-        if (preferencesHelper.getFavoriteSeries() != null){
-            favoriteSeries = preferencesHelper.getFavoriteSeries();
+        if (preferencesHelper.getFavorite() != null){
+            favoriteSeries = preferencesHelper.getFavorite();
         }
 
         mdialog = new ProgressDialog(getContext());
@@ -108,7 +102,7 @@ public class SeriesFragment extends Fragment implements SeriesView {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FavoriteActivity.start(getContext());
+                FavoriteActivity.start(getContext(), 2);
             }
         });
 
@@ -206,37 +200,35 @@ public class SeriesFragment extends Fragment implements SeriesView {
                         if (favoriteSeries.size() > 0){
                             selectedSeries.clear();
                             for (int j=0; j<favoriteSeries.size(); j++) {
-                                FavoriteSeriesParam eachSeries = favoriteSeries.get(j);
+                                FavoriteParam eachSeries = favoriteSeries.get(j);
                                 if (response.get(i - 1).getId() == eachSeries.getId()) {
                                     selectedSeries.add(eachSeries);
                                     favoriteSeries.remove(eachSeries);
-                                    PreferencesHelper.deleteFavoriteSeries();
-                                    preferencesHelper.saveFavoriteSries(favoriteSeries);
+                                    PreferencesHelper.deleteFavorite();
+                                    preferencesHelper.saveFavorite(favoriteSeries);
                                     break;
                                 }
                             }
 
                             if (selectedSeries.size() == 0){
-                                FavoriteSeriesParam eachData = new FavoriteSeriesParam(
-                                        response.get(i - 1).getOriginal_name(),response.get(i - 1).getName(),response.get(i - 1).getPopularity(),
-                                        response.get(i - 1).getVote_count(),response.get(i - 1).getFirst_air_date(),response.get(i - 1).getGenre_ids()[0],
-                                        response.get(i - 1).getBackdrop_path(),response.get(i - 1).getOriginal_language(),response.get(i - 1).getId(),
-                                        1, response.get(i - 1).getVote_average(),response.get(i - 1).getOverview(),response.get(i - 1).getPoster_path()
+                                FavoriteParam eachData = new FavoriteParam(
+                                        response.get(i - 1).getPoster_path(),response.get(i - 1).getGenre_ids()[0],response.get(i - 1).getId(),
+                                        response.get(i - 1).getOriginal_name(),response.get(i - 1).getName(),response.get(i - 1).getVote_average(),
+                                        response.get(i - 1).getOverview(),response.get(i - 1).getFirst_air_date()
                                 );
                                 favoriteSeries.add(eachData);
-                                PreferencesHelper.deleteFavoriteSeries();
-                                preferencesHelper.saveFavoriteSries(favoriteSeries);
+                                PreferencesHelper.deleteFavorite();
+                                preferencesHelper.saveFavorite(favoriteSeries);
                             }
                         }else{
-                            FavoriteSeriesParam eachData = new FavoriteSeriesParam(
-                                    response.get(i - 1).getOriginal_name(),response.get(i - 1).getName(),response.get(i - 1).getPopularity(),
-                                    response.get(i - 1).getVote_count(),response.get(i - 1).getFirst_air_date(),response.get(i - 1).getGenre_ids()[0],
-                                    response.get(i - 1).getBackdrop_path(),response.get(i - 1).getOriginal_language(),response.get(i - 1).getId(),
-                                    1, response.get(i - 1).getVote_average(),response.get(i - 1).getOverview(),response.get(i - 1).getPoster_path()
+                            FavoriteParam eachData = new FavoriteParam(
+                                    response.get(i - 1).getPoster_path(),response.get(i - 1).getGenre_ids()[0],response.get(i - 1).getId(),
+                                    response.get(i - 1).getOriginal_name(),response.get(i - 1).getName(),response.get(i - 1).getVote_average(),
+                                    response.get(i - 1).getOverview(),response.get(i - 1).getFirst_air_date()
                             );
                             favoriteSeries.add(eachData);
-                            PreferencesHelper.deleteFavoriteSeries();
-                            preferencesHelper.saveFavoriteSries(favoriteSeries);
+                            PreferencesHelper.deleteFavorite();
+                            preferencesHelper.saveFavorite(favoriteSeries);
                         }
 
                         presenter.getSeries();
