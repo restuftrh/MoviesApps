@@ -44,15 +44,39 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Favorite Movies :"
+                android:textColor="@color/Black"
+                android:layout_margin="@dimen/spacing_10"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <net.derohimat.baseapp.ui.view.BaseRecyclerView
                 android:id="@+id/recyle_row"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp">
 
             </net.derohimat.baseapp.ui.view.BaseRecyclerView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Favorite Series :"
+                android:textColor="@color/Black"
+                android:layout_margin="@dimen/spacing_10"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+            <net.derohimat.baseapp.ui.view.BaseRecyclerView
+                android:id="@+id/recyle_row_series"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+            </net.derohimat.baseapp.ui.view.BaseRecyclerView>
 
         </LinearLayout>
 

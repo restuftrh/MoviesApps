@@ -8,6 +8,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.MovieApps.R;
+import com.MovieApps.data.local.PreferencesHelper;
+import com.MovieApps.model.favorite.FavoriteMoviesParam;
+import com.MovieApps.model.favorite.FavoriteSeriesParam;
 import com.MovieApps.model.movies.ListMoviesResponse;
 import com.MovieApps.model.series.ListSeriesResponse;
 import com.bumptech.glide.Glide;
@@ -45,6 +48,7 @@ public class SeriesGridAdapter extends BaseRecyclerAdapter<ListSeriesResponse, S
         @Bind(R.id.bg_row) RelativeLayout bgColor;
         @Bind(R.id.score_row) TextView score;
         @Bind(R.id.image_row) BaseImageView image;
+        @Bind(R.id.favorite_row) BaseImageView favorite;
         @Bind(R.id.rating_row) TextView rating;
         @Bind(R.id.title_row) TextView title;
         @Bind(R.id.date_row) TextView date;
@@ -60,6 +64,20 @@ public class SeriesGridAdapter extends BaseRecyclerAdapter<ListSeriesResponse, S
 
         @Override
         public void bind(ListSeriesResponse data) {
+
+            if (PreferencesHelper.getFavoriteSeries() != null){
+                for (int j=0; j<PreferencesHelper.getFavoriteSeries().size(); j++) {
+                    FavoriteSeriesParam eachSeries = PreferencesHelper.getFavoriteSeries().get(j);
+                    if (data.getId() == eachSeries.getId()) {
+                        favorite.setVisibility(View.VISIBLE);
+                        break;
+                    }else{
+                        favorite.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+
             if(Double.valueOf(data.getVote_average()) <= 10){
                 if (Double.valueOf(data.getVote_average()) >= 8){
                     score.setText("A");
@@ -98,8 +116,6 @@ public class SeriesGridAdapter extends BaseRecyclerAdapter<ListSeriesResponse, S
             title.setText(data.getName());
             date.setText(data.getFirst_air_date());
             overview.setText(data.getOverview());
-
-
 
 
         }

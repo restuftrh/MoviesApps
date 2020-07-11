@@ -1,18 +1,14 @@
 package com.MovieApps.model.favorite;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
-public class FavoriteSeriesResponse implements Parcelable {
-
+public class FavoriteSeriesParam {
     @SerializedName("original_name") private String original_name;
     @SerializedName("name") private String name;
     @SerializedName("popularity") private String popularity;
     @SerializedName("vote_count") private String vote_count;
     @SerializedName("first_air_date") private String first_air_date;
-    @SerializedName("genre_ids") private int[] genre_ids;
+    @SerializedName("genre_ids") private int genre_ids;
     @SerializedName("backdrop_path") private String backdrop_path;
     @SerializedName("original_language") private String original_language;
     @SerializedName("id") private int id;
@@ -22,43 +18,22 @@ public class FavoriteSeriesResponse implements Parcelable {
     @SerializedName("poster_path") private String poster_path;
 
 
-
-    protected FavoriteSeriesResponse(Parcel in) {
-        original_name = in.readString();
-        name = in.readString();
-        popularity = in.readString();
-        vote_count = in.readString();
-        first_air_date = in.readString();
-        genre_ids = in.createIntArray();
-        backdrop_path = in.readString();
-        original_language = in.readString();
-        id = in.readInt();
-        status = in.readInt();
-        vote_average = in.readString();
-        overview = in.readString();
-        poster_path = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(original_name);
-        dest.writeString(name);
-        dest.writeString(popularity);
-        dest.writeString(vote_count);
-        dest.writeString(first_air_date);
-        dest.writeIntArray(genre_ids);
-        dest.writeString(backdrop_path);
-        dest.writeString(original_language);
-        dest.writeInt(id);
-        dest.writeInt(status);
-        dest.writeString(vote_average);
-        dest.writeString(overview);
-        dest.writeString(poster_path);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public FavoriteSeriesParam(String original_name, String name, String popularity, String vote_count, String first_air_date,
+                               int genre_ids, String backdrop_path, String original_language, int id, int status, String vote_average,
+                               String overview, String poster_path) {
+        this.original_name = original_name;
+        this.name = name;
+        this.popularity = popularity;
+        this.vote_count = vote_count;
+        this.first_air_date = first_air_date;
+        this.genre_ids = genre_ids;
+        this.backdrop_path = backdrop_path;
+        this.original_language = original_language;
+        this.id = id;
+        this.status = status;
+        this.vote_average = vote_average;
+        this.overview = overview;
+        this.poster_path = poster_path;
     }
 
     public String getOriginal_name() {
@@ -101,11 +76,11 @@ public class FavoriteSeriesResponse implements Parcelable {
         this.first_air_date = first_air_date;
     }
 
-    public int[] getGenre_ids() {
+    public int getGenre_ids() {
         return genre_ids;
     }
 
-    public void setGenre_ids(int[] genre_ids) {
+    public void setGenre_ids(int genre_ids) {
         this.genre_ids = genre_ids;
     }
 
@@ -165,15 +140,6 @@ public class FavoriteSeriesResponse implements Parcelable {
         this.poster_path = poster_path;
     }
 
-    public static final Creator<FavoriteSeriesResponse> CREATOR = new Creator<FavoriteSeriesResponse>() {
-        @Override
-        public FavoriteSeriesResponse createFromParcel(Parcel in) {
-            return new FavoriteSeriesResponse(in);
-        }
 
-        @Override
-        public FavoriteSeriesResponse[] newArray(int size) {
-            return new FavoriteSeriesResponse[size];
-        }
-    };
+
 }

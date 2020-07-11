@@ -8,12 +8,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.MovieApps.R;
+import com.MovieApps.data.local.PreferencesHelper;
+import com.MovieApps.model.favorite.FavoriteMoviesParam;
 import com.MovieApps.model.movies.ListMoviesResponse;
 import com.bumptech.glide.Glide;
 
 import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
 import net.derohimat.baseapp.ui.adapter.viewholder.BaseItemViewHolder;
 import net.derohimat.baseapp.ui.view.BaseImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -44,6 +49,7 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
         @Bind(R.id.bg_row) RelativeLayout bgColor;
         @Bind(R.id.score_row) TextView score;
         @Bind(R.id.image_row) BaseImageView image;
+        @Bind(R.id.favorite_row) BaseImageView favorite;
         @Bind(R.id.rating_row) TextView rating;
         @Bind(R.id.title_row) TextView title;
         @Bind(R.id.date_row) TextView date;
@@ -59,6 +65,19 @@ public class MoviesGridAdapter extends BaseRecyclerAdapter<ListMoviesResponse, M
 
         @Override
         public void bind(ListMoviesResponse data) {
+            if (PreferencesHelper.getFavoriteMovies() != null){
+                for (int j=0; j<PreferencesHelper.getFavoriteMovies().size(); j++) {
+                    FavoriteMoviesParam eachMoviest = PreferencesHelper.getFavoriteMovies().get(j);
+                    if (data.getId() == eachMoviest.getId()) {
+                        favorite.setVisibility(View.VISIBLE);
+                        break;
+                    }else{
+                        favorite.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+
             if(Double.valueOf(data.getVote_average()) <= 10){
                 if (Double.valueOf(data.getVote_average()) >= 8){
                     score.setText("A");
