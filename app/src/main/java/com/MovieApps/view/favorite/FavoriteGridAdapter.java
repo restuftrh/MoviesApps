@@ -61,21 +61,21 @@ public class FavoriteGridAdapter extends BaseRecyclerAdapter<FavoriteParam, Favo
         @Override
         public void bind(FavoriteParam data) {
             favorite.setVisibility(View.VISIBLE);
-                if(Double.valueOf(data.getVote_average()) <= 10){
-                    if (Double.valueOf(data.getVote_average()) >= 8){
-                        score.setText("A");
-                    }else if(Double.valueOf(data.getVote_average()) <= 7){
-                        if (Double.valueOf(data.getVote_average()) >= 6){
-                            score.setText("B");
-                        }else if (Double.valueOf(data.getVote_average()) <= 5){
-                            if (Double.valueOf(data.getVote_average()) >= 4){
-                                score.setText("C");
-                            }else if (Double.valueOf(data.getVote_average()) < 4){
-                                score.setText("D");
-                            }
+            if(Float.valueOf(data.getVote_average()) <= 10){
+                if (Float.valueOf(data.getVote_average()) >= 8){
+                    score.setText("A");
+                }else if(Float.valueOf(data.getVote_average()) < 8){
+                    if (Float.valueOf(data.getVote_average()) >= 6){
+                        score.setText("B");
+                    }else if (Float.valueOf(data.getVote_average()) < 6){
+                        if (Float.valueOf(data.getVote_average()) >= 4){
+                            score.setText("C");
+                        }else if (Float.valueOf(data.getVote_average()) < 4){
+                            score.setText("D");
                         }
                     }
                 }
+            }
 
                 if (data.getGenre_ids() == 1){
                     gendre.setText("Action");
